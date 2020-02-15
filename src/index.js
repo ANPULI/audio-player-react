@@ -1,12 +1,72 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import AudioPlayer from './components/AudioPlayer'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const apiUrl = "http://localhost:3000/";
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentIndex: 0,
+      maxIndex: 0,
+      currentMusic: null,
+      musicList: null,
+    }
+  }
+
+  componentWillMount() {
+    this.loadMusicList();
+  }
+
+  loadMusicList = () => {
+    this.setState((state, props) => {
+      let musicList = [
+        {
+          id: 494064179,
+          name: "柴 鱼 の c a l l i n g【已售】",
+          url: "https://music.163.com/song/media/outer/url?id=494064179.mp3",
+          duration: 151792,
+        },
+        {
+          id: 433107530,
+          name: "So Cute~",
+          url: "https://music.163.com/song/media/outer/url?id=433107530.mp3",
+          duration: 184267,
+        },
+      ];
+      return {
+        currentIndex: 0,
+        maxIndex: musicList.length - 1,
+        currentMusic: musicList[0],
+        musicList: musicList,
+      };
+    });
+  }
+
+  handleNextClick = () => {
+    this.setState((state, props) => {
+      let newIndex = (state.currentIndex === state.maxIndex) ? 0 : state.currentIndex + 1;
+      return {
+        currentIndex: newIndex,
+        currentMusic: state.musicList[newIndex],
+      };
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h1> Music Here</h1>
+        <button onClick={this.loadMusicList}>Load music list</button>
+        <button onClick={this.handleNextClick}>next</button>
+        <AudioPlayer currentMusic={this.state.currentMusic} musicList={this.state.musicList}/>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <App />,
+  document.querySelector('#root')
+);
