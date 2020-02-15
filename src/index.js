@@ -54,13 +54,30 @@ class App extends React.Component {
     });
   }
 
+  handlePrevClick = () => {
+    this.setState((state, props) => {
+      let newIndex = (state.currentIndex === 0) ? state.maxIndex : state.currentIndex - 1;
+      return {
+        currentIndex: newIndex,
+        currentMusic: state.musicList[newIndex],
+      };
+    });
+  }
+
   render() {
     return (
       <div>
         <h1> Music Here</h1>
         <button onClick={this.loadMusicList}>Load music list</button>
         <button onClick={this.handleNextClick}>next</button>
-        <AudioPlayer currentMusic={this.state.currentMusic} musicList={this.state.musicList}/>
+        <button onClick={this.handlePrevClick}>prev</button>
+        <AudioPlayer 
+          currentMusic={this.state.currentMusic} 
+          musicList={this.state.musicList} 
+          onAudioEnded={this.handleNextClick} 
+          handleNext = {this.handleNextClick}
+          handlePrev = {this.handlePrevClick}
+        />
       </div>
     );
   }
