@@ -32,6 +32,47 @@ em, i {
     font-size: inherit;
 }
 
+h4 {
+    display: block;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+body, html, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, header, menu, section, p, input, td, th, ins {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+li, s {
+    list-style: none;
+}
+
 .playbar .updn .left, .playbar .updn .right, .playbar .updn .btn, .playbar .bg, .playbar .btns a, .playbar .head .mask, .playbar .icn, .playbar .ctrl, .playbar .tip, .vol .curr, .playbar .words .mv, .vol .barbg, .playbar .words .src {
     background: url(../img/playbar.png) no-repeat 0 9999px;
 }
@@ -437,4 +478,427 @@ img, .txt {
     height: 39px;
     line-height: 34px;
     background-position: 0 -457px;
+}
+
+.playbar .list {
+    position: absolute;
+    left: 50%;
+    bottom: 47px;
+    width: 986px;
+    height: 301px;
+    margin-left: -493px;
+}
+
+.playbar .listhd, .playbar .listbd {
+    background: url(../img/playlist_bg.png) no-repeat;
+}
+
+.playbar .listhd, .playbar .listbd {
+    padding: 0 5px;
+}
+
+.playbar .listhd {
+    background-position: 0 0;
+    height: 41px;
+}
+
+.playbar .listhdc {
+    position: relative;
+    height: 40px;
+}
+
+
+.playbar .listhdc h4 {
+    position: absolute;
+    left: 25px;
+    top: 0;
+    height: 39px;
+    line-height: 39px;
+    font-size: 14px;
+    color: #e2e2e2;
+}
+
+.playbar .listhdc a {
+    color: #ccc;
+}
+
+.playbar .listhdc .clear, .playbar .listhdc .addall {
+    position: absolute;
+    left: 490px;
+    top: 12px;
+    height: 15px;
+    line-height: 15px;
+    cursor: pointer;
+}
+
+.playbar .listhdc .addall {
+    left: 398px;
+}
+
+.playbar .list .close, .playbar .playicn, .playbar .ico {
+    background: url('../img/playlist.png') no-repeat 0 9999px;
+}
+
+.playbar .ico {
+    height: 16px;
+}
+
+.playbar .ico-add {
+    width: 16px;
+    background-position: -24px 0;
+}
+
+.playbar .listhdc .ico {
+    float: left;
+    margin: 1px 6px 0 0;
+}
+
+.playbar .listhdc .line {
+    position: absolute;
+    top: 13px;
+    left: 477px;
+    height: 15px;
+    border-left: 1px solid #000;
+    border-right: 1px solid #2c2c2c;
+}
+
+.playbar .icn-del {
+    width: 13px;
+    background-position: -51px 0;
+}
+
+.f-ff0 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.playbar .listhdc .lytit {
+    position: absolute;
+    left: 595px;
+    top: 0;
+    width: 346px;
+    text-align: center;
+    height: 39px;
+    line-height: 39px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.playbar .listhdc .close {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    text-indent: -999px;
+    cursor: pointer;
+    background-position: -195px 9px;
+}
+
+.playbar .listhd, .playbar .listbd {
+    padding: 0 5px;
+}
+
+.playbar .listbd {
+    position: absolute;
+    left: 0;
+    top: 41px;
+    width: 976px;
+    _width: 972px;
+    height: 260px;
+    overflow: hidden;
+    background-position: -1014px 0;
+    _background-position: -1018px 0;
+    background-repeat: repeat-y;
+}
+
+.playbar .imgbg {
+    position: absolute;
+    left: 2px;
+    top: -1px;
+    z-index: 1;
+    width: 980px;
+    height: auto;
+    opacity: .2;
+    filter: Alpha(opacity=20);
+}
+
+.playbar .msk {
+    position: absolute;
+    left: 2px;
+    _left: 0;
+    top: 0;
+    z-index: 2;
+    width: 558px;
+    height: 260px;
+    background: #121212;
+    opacity: .5;
+    filter: Alpha(opacity=50);
+}
+
+.playbar .listbdc {
+    position: absolute;
+    left: 2px;
+    _left: 0;
+    top: 0;
+    z-index: 4;
+    height: 260px;
+    width: 553px;
+    overflow: hidden;
+}
+
+.playbar .listbdc ul {
+    overflow: hidden;
+}
+
+.playbar .list ul {
+    color: #ccc;
+}
+
+.playbar .list li {
+    float: left;
+    width: 100%;
+}
+
+.playbar .list li.z-sel {
+    background-color: rgba(0,0,0,0.3);
+    _background-color: #202020;
+}
+
+.playbar .col a, .playbar .col a:hover {
+    color: #9b9b9b;
+}
+
+.playbar .col {
+    float: left;
+    padding-left: 10px;
+    height: 28px;
+    line-height: 28px;
+    _line-height: 29px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.playbar .col-1 {
+    width: 10px;
+}
+
+.playbar .playicn {
+    display: none;
+    margin-top: 8px;
+    width: 10px;
+    height: 13px;
+    background-position: -182px 0;
+}
+
+.playbar .list li.z-sel .playicn, .playbar .list li:hover .icns, .playbar .list li.z-hover1 .icns {
+    display: block;
+}
+
+.playbar .col-2, .playbar .col-4 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.playbar .col-2 {
+    width: 256px;
+}
+
+.playbar .list li:hover .col, .playbar .list li:hover .col a, .playbar .list li:hover .col a:hover, .playbar .list li.z-sel .col, .playbar .list li.z-sel .col a, .playbar .list li.z-sel .col a:hover {
+    color: #fff;
+}
+
+.playbar .col-3 {
+    width: 78px;
+    position: relative;
+}
+
+.playbar .col .icns {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100px;
+    height: 23px;
+}
+
+.playbar .col .ico {
+    float: right;
+    overflow: hidden;
+    margin: 7px 0 0 10px;
+    text-indent: -9999px;
+}
+
+.playbar .icn-del {
+    width: 13px;
+    background-position: -51px 0;
+}
+
+.playbar .ico-dl {
+    width: 14px;
+    background-position: -57px -50px;
+}
+
+.playbar .ico-share {
+    width: 14px;
+    background-position: 0 0;
+}
+
+.playbar .ico-add {
+    width: 16px;
+    background-position: -24px 0;
+}
+
+.playbar .col-2, .playbar .col-4 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.playbar .col-4 {
+    width: 70px;
+}
+
+.playbar .col-5 {
+    width: 35px;
+    color: #666;
+}
+
+.playbar .col-6 {
+    width: 37px;
+    padding-left: 6px;
+}
+
+.playbar .col .ico {
+    float: right;
+    overflow: hidden;
+    margin: 7px 0 0 10px;
+    text-indent: -9999px;
+}
+
+.playbar .col .ico-src {
+    width: 14px;
+    margin-left: 0;
+    background-position: -80px 0px;
+}
+
+.playbar .col .ico-src-dis, .playbar .col .ico-src-dis:hover {
+    background-position: -100px 0;
+    cursor: default;
+}
+
+.playbar .listbd .bline {
+    position: absolute;
+    left: 555px;
+    _left: 553px;
+    top: -1px;
+    z-index: 2;
+    width: 6px;
+    height: 260px;
+    background: #000;
+    opacity: .5;
+    filter: Alpha(opacity=50);
+}
+
+.playbar .listbd .scrol {
+    position: absolute;
+    left: 0;
+    top: 0px;
+    width: 4px;
+    border-radius: 5px;
+    height: 100px;
+    cursor: pointer;
+    background: #868686;
+    border: 1px solid #a6a6a6;
+    opacity: .8;
+    filter: Alpha(opacity=80);
+}
+
+.playbar .ask {
+    position: absolute;
+    right: 25px;
+    top: 12px;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.playbar .ico-ask {
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    background-position: 0 -50px;
+    text-indent: 0;
+}
+
+.playbar .upload {
+    position: absolute;
+    right: 12px;
+    top: 40px;
+    box-shadow: 0 2px 3px rgba(0,0,0,.75);
+    width: 81px;
+    z-index: 5;
+    display: none;
+}
+
+.playbar .upload a {
+    display: block;
+    text-align: center;
+    padding: 8px 0;
+    color: #666;
+    background: #ebebeb;
+    text-shadow: 0 1px 0 #fff;
+}
+
+.playbar .msk2 {
+    position: absolute;
+    left: 560px;
+    _left: 560px;
+    top: 0;
+    z-index: 3;
+    width: 420px;
+    height: 250px;
+    background: #121212;
+    opacity: .01;
+    filter: Alpha(opacity=1);
+}
+
+.playbar .listlyric {
+    position: absolute;
+    right: 40px;
+    top: 0;
+    z-index: 4;
+    margin: 21px 0 20px 0;
+    height: 219px;
+    width: 354px;
+    overflow: hidden;
+}
+
+.playbar .list .nocnt {
+    padding-top: 85px;
+    text-align: center;
+    line-height: 43px;
+}
+
+.playbar .list .nocnt, .playbar .list .nocnt a {
+    color: #aaa;
+}
+
+.playbar .list .nolyric {
+    padding-top: 85px;
+}
+
+.s-fc4, a.s-fc4:hover {
+    color: #999;
+}
+
+.playbar .listbd .bline-1 {
+    left: auto;
+    right: 2px;
+    _right: 0;
+}
+
+.playbar .listbd .scrol-1 {
+    left: auto;
+    right: 0;
 }

@@ -1,10 +1,11 @@
-import React from 'react'
-import '../assets/css/audio-player.css'
+import React from 'react';
+import '../assets/css/audio-player.css';
+
+import PlayListCom from './PlayListCom';
 
 let clamp = (val, min, max) => Math.min(Math.max(val, min), max);
 
 function VolCom(props) {
-
 
   return (
     <div 
@@ -33,6 +34,7 @@ class AudioPlayer extends React.Component {
       isProgressBarMouseDown: false,
       isVolumeBarVisible: false,
       isVolumeBarMouseDown: false,
+      isPlayListVisible: false,
       volume: 0.5,
       currentTime: 0,
       formattedCurrentTime: "00:00",
@@ -168,13 +170,13 @@ class AudioPlayer extends React.Component {
       volume: volume,
       isVolumeBarMouseDown: true,
     });
-  }
+  };
 
   handleVolumeBarMouseUp = event => {
     this.setState({
       isVolumeBarMouseDown: false,
     });
-  }
+  };
 
   handleVolumeBarMouseMove = event => {
     let volume = (event.pageY - this.vbar.getBoundingClientRect().y) / this.vbar.getBoundingClientRect().height;
@@ -183,7 +185,14 @@ class AudioPlayer extends React.Component {
     this.setState({
       volume: volume,
     });
-  }
+  };
+
+  handlePlayListClick = event => {
+    this.setState((state, props) => {
+      return {isPlayListVisible: !state.isPlayListVisible};
+    });
+  };
+
 
   getMusicName = () => {
     return this.props.currentMusic ? this.props.currentMusic.name : "song name";
@@ -297,11 +306,12 @@ class AudioPlayer extends React.Component {
               <a hidefocus="true" data-action="mode" className="icn icn-loop" title="循环"></a>
               <span className="add f-pr">
                 <span className="tip" style={{display: "none"}}>已开始播放</span>
-                <a title="播放列表" hidefocus="true" data-action="panel" className="icn icn-list s-fc3">222</a>
+                <a title="播放列表" hidefocus="true" data-action="panel" className="icn icn-list s-fc3" onClick={this.handlePlayListClick}>222</a>
               </span>
               <div className="tip tip-1" style={{display: "none"}}>循环</div>
             </div>
           </div>
+          <PlayListCom isVisible={this.state.isPlayListVisible}/>
         </div>
       </div>
     )
