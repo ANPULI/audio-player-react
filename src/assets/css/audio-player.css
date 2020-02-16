@@ -1,0 +1,283 @@
+.playbar {
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.btmbar {
+    position: fixed;
+    zoom: 1;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    width: 100%;
+    z-index: 1002;
+}
+
+a {
+    text-decoration: none;
+}
+
+a, a *, .f-hand, .f-hand * {
+    cursor: pointer;
+}
+
+em, i {
+    font-style: normal;
+    text-align: left;
+    font-size: inherit;
+}
+
+.playbar .updn .left, .playbar .updn .right, .playbar .updn .btn, .playbar .bg, .playbar .btns a, .playbar .head .mask, .playbar .icn, .playbar .ctrl, .playbar .tip, .vol .curr, .playbar .words .mv, .vol .barbg, .playbar .words .src {
+    background: url(../img/playbar.png) no-repeat 0 9999px;
+}
+
+img, .txt {
+    border: 0;
+}
+
+.playbar .btns, .playbar .head, .playbar .play, .playbar .volum, .playbar .oper {
+    float: left;
+}
+
+.playbar {
+    position: absolute;
+    zoom: 1;
+    top: -53px;
+    left: 0;
+    width: 100%;
+    height: 53px;
+    margin: 0 auto;
+}
+
+.playbar .bg {
+    height: 53px;
+    zoom: 1;
+    /* margin-right: 67px; */
+    background-position: 0 0;
+    background-repeat: repeat-x;
+}
+
+.playbar .wrap {
+    position: absolute;
+    left: 50%;
+    top: 6px;
+    z-index: 15;
+    width: 980px;
+    height: 47px;
+    margin: 0 auto;
+    margin-left: -498.5px;
+}
+
+.playbar .btns {
+    width: 137px;
+    padding: 6px 0 0 0;
+}
+
+.playbar .btns a {
+    display: block;
+    float: left;
+    width: 28px;
+    height: 28px;
+    margin-right: 8px;
+    margin-top: 5px;
+    text-indent: -9999px;
+}
+
+.playbar .btns .prv {
+    background-position: 0 -130px;
+}
+
+.playbar .btns .prv:hover {
+    background-position: -30px -130px;
+}
+
+.playbar .btns .ply {
+    width: 36px;
+    height: 36px;
+    margin-top: 0;
+    background-position: 0 -204px;
+}
+
+.playbar .btns .ply:hover {
+    background-position: -40px -204px;
+}
+
+.playbar .btns .pas {
+    width: 36px;
+    height: 36px;
+    margin-top: 0;
+    background-position: 0 -165px;
+}
+
+.playbar .btns .pas:hover {
+    background-position: -40px -165px;
+}
+
+.playbar .btns .nxt {
+    background-position: -80px -130px;
+}
+
+.playbar .btns .nxt:hover{
+    background-position: -110px -130px;
+}
+
+.playbar .head, .playbar .head img {
+    width: 34px;
+    height: 34px;
+}
+
+.playbar .head {
+    position: relative;
+    zoom: 1;
+    margin: 6px 15px 0 0;
+}
+
+.playbar .head, .playbar .head img {
+    width: 34px;
+    height: 34px;
+}
+
+.playbar .head .mask {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: block;
+    width: 34px;
+    height: 35px;
+    background-position: 0 -80px;
+}
+
+.playbar .play {
+    position: relative;
+    zoom: 1;
+    width: 608px;
+}
+
+.playbar .words {
+    height: 28px;
+    overflow: hidden;
+    color: #e8e8e8;
+    text-shadow: 0 1px 0 #171717;
+    line-height: 28px;
+}
+
+.f-fl {
+    float: left;
+}
+
+.f-thide {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+
+.playbar .words .fc1 {
+    color: #e8e8e8;
+}
+
+.playbar .words .name {
+    max-width: 300px;
+}
+
+.playbar .words .by {
+    max-width: 220px;
+    margin-left: 15px;
+    color: #9b9b9b;
+}
+
+.playbar .words .by a {
+    color: #9b9b9b;
+}
+
+.pbar .barbg, .pbar .cur, .pbar .rdy, .pbar .left {
+    background: url(../img/statbar.png) no-repeat 0 9999px;
+}
+
+.pbar {
+    position: relative;
+    zoom: 1;
+}
+
+.pbar, .pbar .barbg {
+    width: 493px;
+}
+
+.pbar .barbg, .pbar .cur, .pbar .rdy {
+    height: 9px;
+    background-position: right 0;
+}
+
+.pbar .rdy {
+    width: 100%;
+    background-position: right -30px;
+}
+
+.pbar .cur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1%;
+    background-position: left -66px;
+}
+
+.pbar .btn, .vol .btn {
+    background: url(../img/iconall.png) no-repeat;
+}
+
+.f-tdn, .f-tdn:hover {
+    text-decoration: none;
+}
+
+.pbar .btn {
+    position: absolute;
+    top: -7px;
+    right: -13px;
+    width: 22px;
+    height: 24px;
+    margin-left: -11px;
+    background-position: 0 -250px;
+}
+
+.pbar .btn i {
+    visibility: hidden;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    background: url(../img/loading.gif);
+}
+
+.pbar .time {
+    position: absolute;
+    top: -3px;
+    right: -84px;
+    color: #797979;
+    text-shadow: 0 1px 0 #121212;
+}
+
+.pbar .time em {
+    color: #a1a1a1;
+}
+
+.playbar .oper {
+    width: 60px;
+}
+
+.playbar .icn {
+    float: left;
+    width: 25px;
+    height: 25px;
+    margin: 11px 2px 0 0;
+    text-indent: -9999px;
+}
+
+.playbar .icn-add {
+    background-position: -88px -163px;
+}
+
+.playbar .icn-share {
+    background-position: -114px -163px;
+}
