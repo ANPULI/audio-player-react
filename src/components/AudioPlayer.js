@@ -135,7 +135,7 @@ class AudioPlayer extends React.Component {
     });
   };
 
-  handleProgressBarMouseMoved = event => {
+  handleProgressBarMouseMove = event => {
     let portion = (event.pageX - this.pbar.getBoundingClientRect().x) / this.pbar.getBoundingClientRect().width;
     portion = clamp(portion, 0, 1);
     let tempWidth = portion * 100 + "%";
@@ -264,7 +264,7 @@ class AudioPlayer extends React.Component {
                 <div className="barbg j-flag"
                   ref={this.setPbarRef}
                   onClick={this.handleProgressBarClicked}
-                  onMouseMove={isProgressBarMouseDown ? this.handleProgressBarMouseMoved : null}
+                  onMouseMove={isProgressBarMouseDown ? this.handleProgressBarMouseMove : null}
                   onMouseDown={this.handleProgressBarMouseDown}
                   onMouseUp={this.handleProgressBarMouseUp}
                 >
