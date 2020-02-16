@@ -3,6 +3,27 @@ import '../assets/css/audio-player.css'
 
 let clamp = (val, min, max) => Math.min(Math.max(val, min), max);
 
+function VolCom(props) {
+
+
+  return (
+    <div 
+      className="vol" 
+      style={{visibility: props.visible ? "visible" : "hidden"}}
+      onClick={props.onClick}
+      onMouseDown={props.onMouseDown}
+      onMouseUp={props.onMouseUp}
+      onMouseMove={props.isMouseDown ? props.onMouseMove : null}
+    >
+      <div className="barbg"></div>
+      <div className="vbg j-t" ref={props.vbarRef} >
+        <div className="curr j-t" style={{height: 93 * props.volume + "px"}}></div>
+        <span className="btn f-alpha j-t" style={{top: 81 * (1 -props.volume) + "px"}}></span>
+      </div>
+    </div>
+  );
+}
+
 class AudioPlayer extends React.Component {
   constructor(props) {
     super(props);
@@ -10,6 +31,9 @@ class AudioPlayer extends React.Component {
       isAutoPlay: false,
       isPaused: true,
       isProgressBarMouseDown: false,
+      isVolumeBarVisible: false,
+      isVolumeBarMouseDown: false,
+      volume: 0.5,
       currentTime: 0,
       formattedCurrentTime: "00:00",
       currentWidth: "0%",
@@ -18,7 +42,8 @@ class AudioPlayer extends React.Component {
       bufferedWidth: "0%",
     }
     this.audio = null;
-    this.pbar = null;
+    this.pbar = null;   // progress bar
+    this.vbar = null;   // volume bar
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -37,11 +62,15 @@ class AudioPlayer extends React.Component {
 
   setAudioRef = element => {
     this.audio = element;
-  }
+  };
 
   setPbarRef = element => {
     this.pbar = element;
-  }
+  };
+
+  setVbarRef = element => {
+    this.vbar = element;
+  };
 
   handlePlay = event => {
     this.audio.paused ? this.audio.play() : this.audio.pause();
@@ -118,6 +147,44 @@ class AudioPlayer extends React.Component {
     });
   };
 
+  handleVolumeIconClicked = event => {
+    this.setState((state, props) => {
+      return {isVolumeBarVisible: !state.isVolumeBarVisible};
+    });
+  };
+
+  handleVolumeBarClicked = event => {
+    let volume = (event.pageY - this.vbar.getBoundingClientRect().y) / this.vbar.getBoundingClientRect().height;
+    volume = 1 - clamp(volume, 0, 1);
+    if (this.audio) { this.audio.volume = volume };
+    this.setState({volume: volume});
+  };
+
+  handleVolumeBarMouseDown = event => {
+    let volume = (event.pageY - this.vbar.getBoundingClientRect().y) / this.vbar.getBoundingClientRect().height;
+    volume = 1 - clamp(volume, 0, 1);
+    if (this.audio) { this.audio.volume = volume };
+    this.setState({
+      volume: volume,
+      isVolumeBarMouseDown: true,
+    });
+  }
+
+  handleVolumeBarMouseUp = event => {
+    this.setState({
+      isVolumeBarMouseDown: false,
+    });
+  }
+
+  handleVolumeBarMouseMove = event => {
+    let volume = (event.pageY - this.vbar.getBoundingClientRect().y) / this.vbar.getBoundingClientRect().height;
+    volume = 1 - clamp(volume, 0, 1);
+    if (this.audio) { this.audio.volume = volume };
+    this.setState({
+      volume: volume,
+    });
+  }
+
   getMusicName = () => {
     return this.props.currentMusic ? this.props.currentMusic.name : "song name";
   };
@@ -168,6 +235,7 @@ class AudioPlayer extends React.Component {
             autoPlay={this.state.isAutoPlay}
             ref={this.setAudioRef} 
             src={this.props.currentMusic ? this.props.currentMusic.url : ""}
+            volume={this.state.volume}
             onEnded={this.props.onAudioEnded}
             onTimeUpdate={isProgressBarMouseDown ? null : this.handleTimeUpdate} 
             onCanPlay={this.handleCanPlay}
@@ -192,14 +260,14 @@ class AudioPlayer extends React.Component {
                   </span>
                 </span>
               </div>
-              <div className="pbar"
-                ref={this.setPbarRef}
-                onClick={this.handleProgressBarClicked}
-                onMouseMove={isProgressBarMouseDown ? this.handleProgressBarMouseMoved : null}
-                onMouseDown={this.handleProgressBarMouseDown}
-                onMouseUp={this.handleProgressBarMouseUp}
-              >
-                <div className="barbg j-flag">
+              <div className="pbar">
+                <div className="barbg j-flag"
+                  ref={this.setPbarRef}
+                  onClick={this.handleProgressBarClicked}
+                  onMouseMove={isProgressBarMouseDown ? this.handleProgressBarMouseMoved : null}
+                  onMouseDown={this.handleProgressBarMouseDown}
+                  onMouseUp={this.handleProgressBarMouseUp}
+                >
                   <div className="rdy" style={{width: this.state.bufferedWidth}}></div>
                   <div className="cur" style={{width: this.state.currentWidth}}>
                     <span className="btn f-tdn f-alpha">
@@ -213,6 +281,25 @@ class AudioPlayer extends React.Component {
             <div className="oper f-fl">
               <a hidefocus="true" data-action="like" className="icn icn-add j-flag" title="收藏">收藏</a>
               <a hidefocus="true" data-action="share" className="icn icn-share" title="分享">分享</a>
+            </div>
+            <div className="ctrl f-fl f-pr j-flag">
+              <VolCom 
+                vbarRef={el => this.vbar = el}
+                visible={this.state.isVolumeBarVisible} 
+                volume={this.state.volume}
+                isMouseDown={this.state.isVolumeBarMouseDown}
+                onClick={this.handleVolumeBarClicked}
+                onMouseDown={this.handleVolumeBarMouseDown}
+                onMouseUp={this.handleVolumeBarMouseUp}
+                onMouseMove={this.handleVolumeBarMouseMove}
+              />
+              <a hidefocus="true" data-action="volume" className="icn icn-vol" onClick={this.handleVolumeIconClicked}></a>
+              <a hidefocus="true" data-action="mode" className="icn icn-loop" title="循环"></a>
+              <span className="add f-pr">
+                <span className="tip" style={{display: "none"}}>已开始播放</span>
+                <a title="播放列表" hidefocus="true" data-action="panel" className="icn icn-list s-fc3">222</a>
+              </span>
+              <div className="tip tip-1" style={{display: "none"}}>循环</div>
             </div>
           </div>
         </div>
