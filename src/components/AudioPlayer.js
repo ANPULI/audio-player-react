@@ -50,12 +50,13 @@ class AudioPlayer extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     // if (! prevState.isAutoPlay) { this.setState({isAutoPlay: true}) }
-    if (this.props.musicList !== prevProps.musicList) {
-
+    if (prevProps !== this.props) {
+      this.render()
     }
   }
 
   componentDidMount() {
+    console.log("Mounted")
     this.setState({
       isPaused: this.audio.paused,
       isAutoPlay: ! this.audio.paused,
@@ -306,12 +307,12 @@ class AudioPlayer extends React.Component {
               <a hidefocus="true" data-action="mode" className="icn icn-loop" title="循环"></a>
               <span className="add f-pr">
                 <span className="tip" style={{display: "none"}}>已开始播放</span>
-                <a title="播放列表" hidefocus="true" data-action="panel" className="icn icn-list s-fc3" onClick={this.handlePlayListClick}>222</a>
+                <a title="播放列表" hidefocus="true" data-action="panel" className="icn icn-list s-fc3" onClick={this.handlePlayListClick}>{this.props.musicList ? this.props.musicList.length : 0}</a>
               </span>
               <div className="tip tip-1" style={{display: "none"}}>循环</div>
             </div>
           </div>
-          <PlayListCom isVisible={this.state.isPlayListVisible}/>
+          <PlayListCom isVisible={this.state.isPlayListVisible} musicList={this.props.musicList} currentIndex={this.props.currentIndex} onChooseMusic={this.props.handleChooseMusic}/>
         </div>
       </div>
     )

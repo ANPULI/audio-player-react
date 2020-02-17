@@ -660,6 +660,11 @@ img, .txt {
     width: 100%;
 }
 
+.playbar .list li:hover, .playbar .list li.z-hover1 {
+    background-color: rgba(0,0,0,0.4);
+    _background-color: #1a1a1a;
+}
+
 .playbar .list li.z-sel {
     background-color: rgba(0,0,0,0.3);
     _background-color: #202020;
