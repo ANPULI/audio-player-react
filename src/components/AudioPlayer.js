@@ -318,6 +318,7 @@ class AudioPlayer extends React.Component {
             currentIndex={this.props.currentIndex} 
             onChooseMusic={this.props.handleChooseMusic}
             onDeleteMusic={this.props.handleDeleteMusic}
+            onDeleteAllMusic={this.props.handleDeleteAllMusic}
           />
         </div>
       </div>

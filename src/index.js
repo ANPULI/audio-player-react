@@ -23,7 +23,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentIndex: 0,
-      maxIndex: 1,
+      maxIndex: playListJson.length - 1,
       currentMusic: playListJson[0],
       musicList: playListJson,
       shouldPlay: false,
@@ -38,8 +38,10 @@ class App extends React.Component {
 
     this.setState((state, props) => {
       return {
-        maxIndex: playListJson.length + state.maxIndex,
-        musicList: state.musicList.concat(playListJson),
+        currentIndex: 0,
+        maxIndex: playListJson.length,
+        currentMusic: playListJson[0],
+        musicList: playListJson,
       };
     });
 
@@ -134,6 +136,15 @@ class App extends React.Component {
     });
   }
 
+  handleDeleteAllMusic = () => {
+    this.setState({
+      currentIndex: null,
+      maxIndex: 0,
+      currentMusic: null,
+      musicList: null,
+    })
+  }
+
   render() {
     return (
       <div>
@@ -151,6 +162,7 @@ class App extends React.Component {
           handlePrev={this.handlePrev} 
           handleChooseMusic={this.handleChooseMusic}
           handleDeleteMusic={this.handleDeleteMusic}
+          handleDeleteAllMusic={this.handleDeleteAllMusic}
           shouldPlay={this.state.shouldPlay}
         />
       </div>

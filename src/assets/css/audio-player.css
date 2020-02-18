@@ -644,7 +644,17 @@ img, .txt {
     z-index: 4;
     height: 260px;
     width: 553px;
-    overflow: hidden;
+    overflow-y: scroll;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.playbar .listbdc::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.playbar .listbdc {
+    -ms-overflow-style: none;
 }
 
 .playbar .listbdc ul {
@@ -812,12 +822,13 @@ img, .txt {
     top: 0px;
     width: 4px;
     border-radius: 5px;
-    height: 100px;
+    height: 8.68448px;
     cursor: pointer;
     background: #868686;
     border: 1px solid #a6a6a6;
     opacity: .8;
     filter: Alpha(opacity=80);
+    display: block;
 }
 
 .playbar .ask {

@@ -44,39 +44,71 @@ function PlayListSongItemCom(props) {
   );
 }
 
-function PlayListCom(props) {
+class PlayListCom extends React.Component {
 
-  if (!props.isVisible) {
-    return null;
+  constructor(props) {
+    
+    super(props);
+    this.state = {
+      scrollThumbTop: "0px",
+    };
+    this.listbdcRef = React.createRef();
+    this.scrollThumbRef = React.createRef();
   }
 
-  let getBlurImg = (img_id) => {
+
+
+  
+
+  getBlurImg = (img_id) => {
     return "https://music.163.com/api/img/blur/" + img_id;
   };
 
-  return (
+  handleScroll = (event) => {
+    let list = this.listbdcRef.current;
+    let portion = list.scrollTop / (list.scrollHeight - list.clientHeight);
+    
+    let scrollThumbTop = portion * (260 - this.props.musicList.length) + "px";
+
+    this.setState((state) => {
+      return {
+        scrollThumbTop: scrollThumbTop
+      }
+    })
+  }
+
+  handleThumbClick = (event) => {
+    let list = this.listbdcRef.current;
+    this.listbdcRef.current.scrollTop = (260 - this.scrollThumbRef.current.scrollTop) / 260 * (list.scrollHeight - list.clientHeight)
+  }
+
+  render() {
+    if (!this.props.isVisible) {
+      return null;
+    }
+    return (
     <div className="list" id="g_playlist">
       <div className="listhd">
         <div className="listhdc">
-          <h4>播放列表(<span className="j-flag">{props.musicList.length}</span>)</h4>
+          <h4>播放列表(<span className="j-flag">{this.props.musicList ? this.props.musicList.length : 0}</span>)</h4>
           <a href="javascript:;" className="addall" data-action="likeall"><span className="ico ico-add"></span>收藏全部</a><span className="line"></span>
-          <a href="javascript:;" className="clear" data-action="clear"><span className="ico icn-del"></span>清除</a>
-          <p className="lytit f-ff0 f-thide j-flag">So Cute~</p>
+          <a href="javascript:;" className="clear" data-action="clear" onClick={this.props.onDeleteAllMusic}><span className="ico icn-del"></span>清除</a>
+          <p className="lytit f-ff0 f-thide j-flag">{this.props.musicList ? this.props.musicList[this.props.currentIndex].name : ""}</p>
           <span className="close" data-action="close">关闭</span>
         </div>
       </div>
       <div className="listbd">
-        <img className="imgbg j-flag" src={getBlurImg(props.musicList[props.currentIndex].img_id)} style={{top: "-360px"}} />
+        <img className="imgbg j-flag" src={this.getBlurImg(this.props.musicList ? this.props.musicList[this.props.currentIndex].img_id : "")} style={{top: "-360px"}} />
         <div className="msk" />
-        <div className="listbdc j-flag" >
+        <div className="listbdc j-flag" ref={this.listbdcRef} onScroll={this.handleScroll}>
           <ul className="f-cb">
-            {props.musicList.map((item, idx) => {
-              return <PlayListSongItemCom key={idx} music={item} idx={idx} isPlaying={idx === props.currentIndex} onChooseMusic={props.onChooseMusic} onDeleteMusic={props.onDeleteMusic}/>
-            })}
+            {this.props.musicList ? this.props.musicList.map((item, idx) => {
+              return <PlayListSongItemCom key={idx} music={item} idx={idx} isPlaying={idx === this.props.currentIndex} onChooseMusic={this.props.onChooseMusic} onDeleteMusic={this.props.onDeleteMusic}/>
+            }) : null}
           </ul>
         </div>
         <div className="bline j-flag" >
-          <span className="scrol" hidefocus="true" style={{height: "8.68448px", display: "block", top: "0px"}}></span>
+          <span className="scrol" hidefocus="true" style={{height: 2600 / this.props.musicList.length + "px", display: "block", top: this.state.scrollThumbTop}} ref={this.scrollThumbRef} onClick={this.handleThumbClick}></span>
         </div>
         <div className="ask j-flag">
           <a className="ico ico-ask"></a> 
@@ -91,11 +123,11 @@ function PlayListCom(props) {
           </div>
         </div>
         <div className="bline bline-1 j-flag">
-          <span className="scrol scrol-1 j-flag" hidefocus="true" style={{height: "260px", display: "none", top: "0px"}}></span>
+          <span className="scrol scrol-1 j-flag" hidefocus="true" style={{height: "260px", display: "none", top: this.state.scrollThumbTop}}></span>
         </div>
       </div>
     </div>
   );
-}
+}}
 
 export default PlayListCom;
