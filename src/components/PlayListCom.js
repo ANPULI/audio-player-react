@@ -13,6 +13,10 @@ function PlayListSongItemCom(props) {
     props.onChooseMusic(props.idx);
   }
 
+  let handleDeleteMusic = () => {
+    props.onDeleteMusic(props.idx);
+  }
+
   return (
     <li className={props.isPlaying ? "z-sel" : ""} data-id={id} data-action="play" onClick={handleChooseMusic}>
       <div className="col col-1">
@@ -21,7 +25,7 @@ function PlayListSongItemCom(props) {
       <div className="col col-2">{name}</div>
       <div className="col col-3">
         <div className="icns">
-          <i className="ico icn-del" title="删除" data-id={id} data-action="delete">删除</i>
+          <i className="ico icn-del" title="删除" data-id={id} data-action="delete" onClick={handleDeleteMusic}>删除</i>
           <i className="ico ico-dl" title="下载" data-id={id} data-action="download">下载</i>
           <i className="ico ico-share" title="分享" data-id={id} data-action="share">分享</i>
           <i className="j-t ico ico-add" title="收藏" data-id={id} data-action="like">收藏</i>
@@ -67,12 +71,12 @@ function PlayListCom(props) {
         <div className="listbdc j-flag" >
           <ul className="f-cb">
             {props.musicList.map((item, idx) => {
-              return <PlayListSongItemCom key={idx} music={item} idx={idx} isPlaying={idx === props.currentIndex} onChooseMusic={props.onChooseMusic}/>
+              return <PlayListSongItemCom key={idx} music={item} idx={idx} isPlaying={idx === props.currentIndex} onChooseMusic={props.onChooseMusic} onDeleteMusic={props.onDeleteMusic}/>
             })}
           </ul>
         </div>
         <div className="bline j-flag" >
-          <span className="scrol" hidefocus="true" style={{height: "260px", display: "none", top: "0px"}}></span>
+          <span className="scrol" hidefocus="true" style={{height: "8.68448px", display: "block", top: "0px"}}></span>
         </div>
         <div className="ask j-flag">
           <a className="ico ico-ask"></a> 

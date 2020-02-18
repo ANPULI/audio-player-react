@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import AudioPlayer from './components/AudioPlayer'
+import playListJson from './assets/playlist.json'
 
 const apiUrl = "http://localhost:3000/";
 const api_playlist = "https://api.imjad.cn/cloudmusic/?type=playlist&id=";
@@ -23,81 +24,59 @@ class App extends React.Component {
     this.state = {
       currentIndex: 0,
       maxIndex: 1,
-      currentMusic: {
-        id: 433107530,
-        name: "So Cute~",
-        url: "https://music.163.com/song/media/outer/url?id=433107530.mp3",
-        infoUrl: "https://music.163.com/song?id=433107530",
-        img_id: "17999005346907556",
-        imgUrl: "https://p2.music.126.net/yFCpD3GrgmcInAbVvVaFUg==/17999005346907556.jpg?param=34y34",
-        duration: 184267,
-        artist: {
-          id: 12027465,
-          url: "https://music.163.com/artist?id=12027465",
-          name: "Lopu$",
-        },
-      },
-      musicList: [{
-        id: 433107530,
-        name: "So Cute~",
-        url: "https://music.163.com/song/media/outer/url?id=433107530.mp3",
-        infoUrl: "https://music.163.com/song?id=433107530",
-        img_id: "17999005346907556",
-        imgUrl: "https://p2.music.126.net/yFCpD3GrgmcInAbVvVaFUg==/17999005346907556.jpg?param=34y34",
-        duration: 184267,
-        artist: {
-          id: 12027465,
-          url: "https://music.163.com/artist?id=12027465",
-          name: "Lopu$",
-        },
-      }],
+      currentMusic: playListJson[0],
+      musicList: playListJson,
       shouldPlay: false,
     }
   }
 
-  componentWillMount() {
-    this.loadMusicList();
-  }
+  // componentWillMount() {
+  //   this.loadMusicList();
+  // }
 
   loadMusicList = () => {
-    
-    getPlayList(playlist_id).then(data => {
-      let result = [];
-      let songIDs = data.playlist.trackIds.map(item => item.id);
-      for (let i = 0; i < 50; i++) {
-        getSongInfo(songIDs[i]).then(rawSongInfo => {
-          let songInfo = rawSongInfo.songs[0];
-          let res = {
-            id: songInfo.id,
-            name: songInfo.name,
-            url: `https://music.163.com/song/media/outer/url?id=${songInfo.id}.mp3`,
-            infoUrl: "https://music.163.com/song?id=" + songInfo.id,
-            img_id: songInfo.al.pic_str,
-            imgUrl: songInfo.al.picUrl + "?param=34y34",
-            duration: songInfo.dt,
-            artist: {
-              id: songInfo.ar[0].id,
-              url: "https://music.163.com/artist?id=" + songInfo.ar[0].id,
-              name: songInfo.ar[0].name,
-            },
-          };
-          this.setState((state) => {
-            return {
-              maxIndex: state.maxIndex + 1,
-              musicList: state.musicList.concat([res])
-            }
-          });
+
+    this.setState((state, props) => {
+      return {
+        maxIndex: playListJson.length + state.maxIndex,
+        musicList: state.musicList.concat(playListJson),
+      };
+    });
+
+    // getPlayList(playlist_id).then(data => {
+    //   let result = [];
+    //   let songIDs = data.playlist.trackIds.map(item => item.id);
+    //   for (let i = 0; i < 50; i++) {
+    //     getSongInfo(songIDs[i]).then(rawSongInfo => {
+    //       let songInfo = rawSongInfo.songs[0];
+    //       let res = {
+    //         id: songInfo.id,
+    //         name: songInfo.name,
+    //         url: `https://music.163.com/song/media/outer/url?id=${songInfo.id}.mp3`,
+    //         infoUrl: "https://music.163.com/song?id=" + songInfo.id,
+    //         img_id: songInfo.al.pic_str,
+    //         imgUrl: songInfo.al.picUrl + "?param=34y34",
+    //         duration: songInfo.dt,
+    //         artist: {
+    //           id: songInfo.ar[0].id,
+    //           url: "https://music.163.com/artist?id=" + songInfo.ar[0].id,
+    //           name: songInfo.ar[0].name,
+    //         },
+    //       };
+    //       // result.push(res)
+    //       this.setState((state) => {
+    //         return {
+    //           maxIndex: state.maxIndex + 1,
+    //           musicList: state.musicList.concat([res])
+    //         }
+    //       });
 
           
-        })
-      }
-      // this.setState((state, props) => {
-      //   return {
-      //     maxIndex: musicList.length + state.maxIndex,
-      //     musicList: state.musicList.concat(musicList),
-      //   };
-      // });
-    })
+    //     })
+    //   }
+    //   // console.log(result)
+
+    // })
 
   };
 
@@ -133,7 +112,7 @@ class App extends React.Component {
     this.setState((state, props) => {
       // recalc current index
       let currentIndex = state.currentIndex;
-      console.log(idx, currentIndex)
+      // console.log(idx, currentIndex)
       if (idx < currentIndex) {
         currentIndex -= 1;
       }
@@ -142,9 +121,9 @@ class App extends React.Component {
       musicList.splice(idx, 1);
       // recalc current music
       let currentMusic = musicList[currentIndex];
-      console.log(currentIndex)
-      console.log(musicList)
-      console.log(currentMusic)
+      // console.log(currentIndex)
+      // console.log(musicList)
+      // console.log(currentMusic)
       let maxIndex = state.maxIndex - 1;
       return ({
         currentIndex: currentIndex,
@@ -171,6 +150,7 @@ class App extends React.Component {
           handleNext={this.handleNext} 
           handlePrev={this.handlePrev} 
           handleChooseMusic={this.handleChooseMusic}
+          handleDeleteMusic={this.handleDeleteMusic}
           shouldPlay={this.state.shouldPlay}
         />
       </div>

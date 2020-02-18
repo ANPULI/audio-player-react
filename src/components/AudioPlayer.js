@@ -312,7 +312,13 @@ class AudioPlayer extends React.Component {
               <div className="tip tip-1" style={{display: "none"}}>循环</div>
             </div>
           </div>
-          <PlayListCom isVisible={this.state.isPlayListVisible} musicList={this.props.musicList} currentIndex={this.props.currentIndex} onChooseMusic={this.props.handleChooseMusic}/>
+          <PlayListCom 
+            isVisible={this.state.isPlayListVisible} 
+            musicList={this.props.musicList} 
+            currentIndex={this.props.currentIndex} 
+            onChooseMusic={this.props.handleChooseMusic}
+            onDeleteMusic={this.props.handleDeleteMusic}
+          />
         </div>
       </div>
     )
