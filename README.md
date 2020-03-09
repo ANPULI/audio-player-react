@@ -1,4 +1,8 @@
-一个仿网易云音乐电脑网页版音乐播放器
+# 一个仿[网易云音乐](https://music.163.com/)网页版音乐播放器 / A mock [NetEase Cloud Music](https://music.163.com/) web player.
+
+**Demo link:** [https://audio-player-react.now.sh/](https://audio-player-react.now.sh/)
+
+[简中](#%e6%92%ad%e6%94%be%e5%99%a8%e5%ae%9e%e7%8e%b0%e5%8a%9f%e8%83%bd) / [English](#audio-player-features)
 
 ## 播放器实现功能
 
@@ -17,9 +21,6 @@
   - [x] 删除歌单中某一首歌曲
   - [x] 删除全部歌单歌曲
   - [ ] 添加歌曲到播放列表
-
-
-This is an audio player created using React mimicing NetEase Cloud Music UI.
 
 ## Audio Player Features
 
