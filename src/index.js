@@ -148,11 +148,18 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1> Music Here</h1>
+        {/* <h1> Music Here</h1>
         <button onClick={this.loadMusicList}>Load music list</button>
         <button onClick={this.handleNext}>next</button>
         <button onClick={this.handlePrev}>prev</button>
-        <button value={0} onClick={() => this.handleDeleteMusic(0)}>deletemusic</button>
+        <button value={0} onClick={() => this.handleDeleteMusic(0)}>deletemusic</button> */}
+        <div style={{margin: "20vh", textAlign: "center"}}>
+          <h1>
+            Below is my implementation of NetEase Cloud Music web player, <br />
+            please click "play" buttion to start. <br />
+            View <a href="https://github.com/ANPULI/audio-player-react">GitHub page</a> for more information.
+          </h1>
+        </div>
         <AudioPlayer 
           currentMusic={this.state.currentMusic} 
           currentIndex={this.state.currentIndex} 
